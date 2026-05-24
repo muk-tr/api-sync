@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using api_sync.Config;
+using api_sync.Utilities;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -38,66 +39,40 @@ public class InitCommand : Command<InitSettings>
 
         AnsiConsole.WriteLine();
 
-        // --- Spec source ---
-        var specSource = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-                .Title("How will api-sync read your API spec?")
-                .AddChoices(
-                    "Local file path",
-                    "URL (running endpoint)",
-                    ".NET assembly (fallback)"
-                )
-        );
+        // --- Step 1: detect web projects and pick which ones to include ---
+        var currentDir = Directory.GetCurrentDirectory();
+        var detectedProjects = ProjectDetector.FindProjects(currentDir);
 
-        string? openapiUrl = null;
-        string? openapiPath = null;
-        string? assemblyPath = null;
+        List<DetectedProject> selectedProjects;
+        List<string> manualNames = [];
 
-        switch (specSource)
+        if (detectedProjects.Count == 0)
         {
-            case "Local file path":
-                openapiPath = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Path to your [green]swagger.json[/] or [green]openapi.yaml[/]:")
-                        .DefaultValue("./docs/swagger.json")
-                );
-                break;
-
-            case "URL (running endpoint)":
-                openapiUrl = AnsiConsole.Prompt(
-                    new TextPrompt<string>("OpenAPI URL:")
-                        .DefaultValue("https://localhost:5001/swagger/v1/swagger.json")
-                );
-                break;
-
-            case ".NET assembly (fallback)":
-                assemblyPath = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Path to your [green].dll[/]:")
-                        .DefaultValue("./bin/Debug/net10.0/MyApi.dll")
-                );
-                break;
+            var name = AnsiConsole.Prompt(
+                new TextPrompt<string>("Collection name:")
+                    .DefaultValue("my-api")
+            );
+            selectedProjects = [];
+            manualNames = [name];
+        }
+        else
+        {
+            var chosen = AnsiConsole.Prompt(
+                new MultiSelectionPrompt<string>()
+                    .Title("Which projects should have a Bruno collection? [grey](Space to select, Enter to confirm)[/]")
+                    .AddChoices(detectedProjects.Select(p => p.Name))
+            );
+            selectedProjects = detectedProjects.Where(p => chosen.Contains(p.Name)).ToList();
         }
 
-        // --- Sync branches (commented out until sync command is implemented) ---
-        // var branchesInput = AnsiConsole.Prompt(
-        //     new TextPrompt<string>("Sync branches [grey](comma-separated, supports prefix/* wildcards)[/]:")
-        //         .DefaultValue("main, develop, feature/*")
-        // );
-        // var syncBranches = branchesInput
-        //     .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
-        //     .ToList();
-        var syncBranches = new List<string>();
+        // --- Step 2: shared Bruno settings ---
+        AnsiConsole.MarkupLine("\n[bold]Bruno collections[/]");
 
-        // --- Bruno collection ---
-        AnsiConsole.MarkupLine("\n[bold]Bruno collection[/]");
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-        var repoPath = AnsiConsole.Prompt(
-            new TextPrompt<string>("Path to your Bruno collection repo:")
-                .DefaultValue("../my-project-bruno")
-        );
-
-        var collectionName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Collection name:")
-                .DefaultValue("my-api")
+        var baseFolder = AnsiConsole.Prompt(
+            new TextPrompt<string>("Base folder for Bruno collections:")
+                .DefaultValue(desktopPath)
         );
 
         var groupBy = AnsiConsole.Prompt(
@@ -106,13 +81,82 @@ public class InitCommand : Command<InitSettings>
                 .AddChoices("tags", "path")
         );
 
+        // --- Step 3: per-project spec source ---
+        var providers = new List<BrunoProviderConfig>();
+
+        var projectEntries = selectedProjects.Count > 0
+            ? selectedProjects.Select(p => (Label: p.Name, CollectionName: p.CollectionName, Project: (DetectedProject?)p))
+            : manualNames.Select(n => (Label: n, CollectionName: n, Project: (DetectedProject?)null));
+
+        foreach (var entry in projectEntries)
+        {
+            AnsiConsole.MarkupLine($"\n[bold]{entry.Label}[/]");
+
+            var specSource = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("  Spec source:")
+                    .AddChoices(
+                        "Local file path",
+                        "URL (running endpoint)",
+                        ".NET assembly (fallback)"
+                    )
+            );
+
+            string? openapiUrl = null;
+            string? openapiPath = null;
+            string? assemblyPath = null;
+
+            switch (specSource)
+            {
+                case "Local file path":
+                    openapiPath = AnsiConsole.Prompt(
+                        new TextPrompt<string>("  Path to [green]swagger.json[/] or [green]openapi.yaml[/]:")
+                            .DefaultValue("./docs/swagger.json")
+                    );
+                    break;
+
+                case "URL (running endpoint)":
+                    openapiUrl = AnsiConsole.Prompt(
+                        new TextPrompt<string>("  OpenAPI URL:")
+                            .DefaultValue("https://localhost:5001/swagger/v1/swagger.json")
+                    );
+                    break;
+
+                case ".NET assembly (fallback)":
+                    var assemblyDefault = entry.Project?.DefaultAssemblyPath
+                        ?? "./bin/Debug/net10.0/MyApi.dll";
+                    assemblyPath = AnsiConsole.Prompt(
+                        new TextPrompt<string>("  Path to [green].dll[/]:")
+                            .DefaultValue(assemblyDefault)
+                    );
+                    break;
+            }
+
+            providers.Add(new BrunoProviderConfig(
+                Type: "bruno",
+                RepoPath: Path.Combine(baseFolder, entry.CollectionName),
+                CollectionName: entry.CollectionName,
+                GroupBy: groupBy,
+                OpenapiUrl: openapiUrl,
+                OpenapiPath: openapiPath,
+                AssemblyPath: assemblyPath
+            ));
+        }
+
+        // --- Sync branches ---
+        var branchesInput = AnsiConsole.Prompt(
+            new TextPrompt<string>("\nSync branches [grey](comma-separated, supports prefix/* wildcards)[/]:")
+                .DefaultValue("main, develop, feature/*")
+        );
+
+        var syncBranches = branchesInput
+            .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+
         // --- Build and write config ---
         var config = new ApiSyncConfig(
-            OpenapiUrl: openapiUrl,
-            OpenapiPath: openapiPath,
-            AssemblyPath: assemblyPath,
             SyncBranches: syncBranches,
-            Providers: [new BrunoProviderConfig("bruno", repoPath, collectionName, groupBy)]
+            Providers: providers
         );
 
         var json = JsonSerializer.Serialize(config, new JsonSerializerOptions
