@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-sync", "api-sync\api-sync.csproj", "{AE9B4EA6-2B2D-4894-B21C-2D650BBD5B1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-sync", "src\api-sync.csproj", "{AE9B4EA6-2B2D-4894-B21C-2D650BBD5B1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
