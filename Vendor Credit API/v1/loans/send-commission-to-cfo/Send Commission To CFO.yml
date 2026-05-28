@@ -1,0 +1,19 @@
+info:
+  name: Send Commission To CFO
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loans/send-commission-to-cfo"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

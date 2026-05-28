@@ -1,0 +1,39 @@
+info:
+  name: Liquidate an investment to wallet or transfer directly to bank
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/:investmentId/liquidate"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "principalAmount": 0,
+        "interestAmount": 0,
+        "preLiquidationFee": 0,
+        "description": "",
+        "applyWithholdingTax": false,
+        "liquidatedAt": "",
+        "isBankTransfer": false,
+        "bankName": "",
+        "accountName": "",
+        "accountNumber": "",
+        "transactionReference": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

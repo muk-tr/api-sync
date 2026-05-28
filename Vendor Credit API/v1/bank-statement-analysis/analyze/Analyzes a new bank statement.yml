@@ -1,0 +1,60 @@
+info:
+  name: Analyzes a new bank statement
+  type: http
+  seq: 1
+  tags:
+    - BankStatementAnalysis
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/bank-statement-analysis/analyze"
+  params:
+    - name: loanRequest
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "status": "",
+        "name": "",
+        "nuban": "",
+        "accountCategory": "",
+        "accountType": "",
+        "ticketNo": "",
+        "availableBal": "",
+        "bookBal": "",
+        "totalCredit": "",
+        "totalDebit": "",
+        "tenor": "",
+        "period": "",
+        "currency": "",
+        "address": "",
+        "applicants": "",
+        "signatories": [
+          {
+            "name": "",
+            "bvn": ""
+          }
+        ],
+        "details": [
+          {
+            "pTransactionDate": "",
+            "pValueDate": "",
+            "pNarration": "",
+            "pCredit": "",
+            "pDebit": "",
+            "pBalance": ""
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,19 @@
+info:
+  name: Get all permission groups
+  type: http
+  seq: 1
+  tags:
+    - Auth
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/auth/permission-groups"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

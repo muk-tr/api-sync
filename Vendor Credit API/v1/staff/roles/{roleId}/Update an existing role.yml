@@ -1,0 +1,35 @@
+info:
+  name: Update an existing role
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/staff/roles/:roleId"
+  params:
+    - name: roleId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "description": "",
+        "permissions": [
+          "view_dashboard_reports"
+        ],
+        "staffGroupId": 0,
+        "userIds": []
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

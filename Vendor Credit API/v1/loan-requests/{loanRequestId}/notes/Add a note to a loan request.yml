@@ -1,0 +1,29 @@
+info:
+  name: Add a note to a loan request
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/:loanRequestId/notes"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "content": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,26 @@
+info:
+  name: Remove a document from an investment
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v1/investments/:investmentId/documents/:documentId"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+    - name: documentId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

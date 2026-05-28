@@ -1,0 +1,26 @@
+info:
+  name: Remove a document from a corporate profile
+  type: http
+  seq: 1
+  tags:
+    - CorporateProfiles
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v1/corporate-profiles/:id/documents/:documentId"
+  params:
+    - name: id
+      value: ""
+      type: path
+    - name: documentId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

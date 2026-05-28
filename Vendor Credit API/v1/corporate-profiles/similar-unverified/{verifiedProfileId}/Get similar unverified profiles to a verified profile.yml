@@ -1,0 +1,26 @@
+info:
+  name: Get similar unverified profiles to a verified profile
+  type: http
+  seq: 1
+  tags:
+    - CorporateProfiles
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/corporate-profiles/similar-unverified/:verifiedProfileId"
+  params:
+    - name: verifiedProfileId
+      value: ""
+      type: path
+    - name: similarityThreshold
+      value: "70"
+      type: query
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

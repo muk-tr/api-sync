@@ -1,0 +1,32 @@
+info:
+  name: Upload document for loan request
+  type: http
+  seq: 2
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/:loanRequestId/documents"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+  body:
+    type: multipart-form
+    data:
+      - name: Type
+        type: text
+        value: ""
+      - name: File
+        type: file
+        value: []
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

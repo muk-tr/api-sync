@@ -1,0 +1,19 @@
+info:
+  name: Reject a rate guide update
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/rate-guide/reject"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

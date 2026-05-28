@@ -1,0 +1,25 @@
+info:
+  name: Change the current staff's profile photo
+  type: http
+  seq: 2
+  tags:
+    - Staff
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/staff/current/profile-photo"
+  body:
+    type: multipart-form
+    data:
+      - name: File
+        type: file
+        value: []
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

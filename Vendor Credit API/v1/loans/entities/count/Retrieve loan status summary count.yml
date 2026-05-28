@@ -1,0 +1,19 @@
+info:
+  name: Retrieve loan status summary count
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loans/entities/count"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

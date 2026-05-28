@@ -1,0 +1,43 @@
+info:
+  name: Add a user
+  type: http
+  seq: 2
+  tags:
+    - Users
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/users"
+  body:
+    type: multipart-form
+    data:
+      - name: File
+        type: file
+        value: []
+      - name: FirstName
+        type: text
+        value: ""
+      - name: LastName
+        type: text
+        value: ""
+      - name: Gender
+        type: text
+        value: ""
+      - name: DateOfBirth
+        type: text
+        value: ""
+      - name: EmailAddress
+        type: text
+        value: ""
+      - name: PhoneNumber
+        type: text
+        value: ""
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

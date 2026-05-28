@@ -1,0 +1,23 @@
+info:
+  name: Retrieve a business profile
+  type: http
+  seq: 1
+  tags:
+    - Businesses
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/businesses/:businessId"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,50 @@
+info:
+  name: Get Check Item Detail
+  type: http
+  seq: 1
+  tags:
+    - MakerChecker
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/maker-checkers/:itemType/:itemId"
+  params:
+    - name: itemType
+      value: RepaymentReversal
+      type: path
+    - name: itemType
+      value: DisbursementReversal
+      type: path
+      disabled: true
+    - name: itemType
+      value: RoleCreation
+      type: path
+      disabled: true
+    - name: itemType
+      value: RoleUpdate
+      type: path
+      disabled: true
+    - name: itemType
+      value: RoleDeletion
+      type: path
+      disabled: true
+    - name: itemType
+      value: CreditTransaction
+      type: path
+      disabled: true
+    - name: itemType
+      value: DebitTransaction
+      type: path
+      disabled: true
+    - name: itemId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

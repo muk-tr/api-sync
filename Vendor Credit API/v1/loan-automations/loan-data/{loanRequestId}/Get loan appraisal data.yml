@@ -1,0 +1,21 @@
+info:
+  name: Get loan appraisal data
+  type: http
+  seq: 1
+  tags:
+    - LoanAutomations
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-automations/loan-data/:loanRequestId"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

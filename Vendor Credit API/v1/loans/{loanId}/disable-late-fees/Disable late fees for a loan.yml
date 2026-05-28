@@ -1,0 +1,23 @@
+info:
+  name: Disable late fees for a loan
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/v1/loans/:loanId/disable-late-fees"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,23 @@
+info:
+  name: Delete an approval workflow
+  type: http
+  seq: 2
+  tags:
+    - ApprovalWorkflows
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v1/approval-workflows/:id"
+  params:
+    - name: id
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

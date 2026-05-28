@@ -1,0 +1,33 @@
+info:
+  name: Create a new "Lease Finance" loan request
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/lease-finance"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 0,
+        "businessId": 0,
+        "assetName": "",
+        "assetPurpose": "",
+        "assetCost": 0,
+        "loanAmount": 0,
+        "tenorInDays": 0,
+        "repaymentFrequency": "OneOff",
+        "sourceLoanRequestId": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

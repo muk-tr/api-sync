@@ -1,0 +1,23 @@
+info:
+  name: Get check by id
+  type: http
+  seq: 1
+  tags:
+    - MakerChecker
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/maker-checkers/:id"
+  params:
+    - name: id
+      value: "91"
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

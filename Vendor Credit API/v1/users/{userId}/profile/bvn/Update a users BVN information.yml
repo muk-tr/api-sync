@@ -1,0 +1,29 @@
+info:
+  name: Update a users BVN information
+  type: http
+  seq: 1
+  tags:
+    - Users
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/users/:userId/profile/bvn"
+  params:
+    - name: userId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "bankVerificationNumber": "4237849823894"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

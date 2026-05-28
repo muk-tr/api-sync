@@ -1,0 +1,23 @@
+info:
+  name: Get a corporate profile by ID
+  type: http
+  seq: 2
+  tags:
+    - CorporateProfiles
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/corporate-profiles/:id"
+  params:
+    - name: id
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,35 @@
+info:
+  name: Update Verification Status a KYC Compliance Item
+  type: http
+  seq: 1
+  tags:
+    - Businesses
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/businesses/:businessId/verifykybitem"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  body:
+    type: multipart-form
+    data:
+      - name: Item
+        type: text
+        value: ""
+      - name: IsVerified
+        type: text
+        value: ""
+      - name: File
+        type: file
+        value: []
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,27 @@
+info:
+  name: Get investment value as at a specific date
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/investments/:investmentId/value-as-at"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+    - name: date
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

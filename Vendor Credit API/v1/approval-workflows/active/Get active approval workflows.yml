@@ -1,0 +1,19 @@
+info:
+  name: Get active approval workflows
+  type: http
+  seq: 1
+  tags:
+    - ApprovalWorkflows
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/approval-workflows/active"
+  auth:
+    type: apikey
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

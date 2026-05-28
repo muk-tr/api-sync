@@ -1,0 +1,23 @@
+info:
+  name: Generate investment certificate
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/investments/:investmentId/generate-certificate"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,28 @@
+info:
+  name: Simplified credit analysis - gets only PDF and credit score
+  type: http
+  seq: 1
+  tags:
+    - CreditAnalysis
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/credit-analysis/analyze-simplified"
+  body:
+    type: json
+    data: |-
+      {
+        "loanRequestId": 0,
+        "customerName": "",
+        "bvn": "",
+        "phoneNumber": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

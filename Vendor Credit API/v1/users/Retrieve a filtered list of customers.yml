@@ -1,0 +1,176 @@
+info:
+  name: Retrieve a filtered list of customers
+  type: http
+  seq: 1
+  tags:
+    - Users
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/users"
+  params:
+    - name: IsVerified
+      value: ""
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: Web
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: Android
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: iOS
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: KongaSHQ
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: BluePages
+      type: query
+      disabled: true
+    - name: RegisteredPlatform
+      value: Unknown
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: LinkedIn
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Facebook
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Instagram
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Twitter
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: eCommerce
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: TechPortal
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: WhatsApp
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: GoogleAds
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Konga
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Jumia
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Traction
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Paystack
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Others
+      type: query
+      disabled: true
+    - name: ReferralSource
+      value: Referral
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: SignedUp
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: EmailVerified
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: ProfileCompleted
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: KYCCompleted
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: KYBCompleted
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: VerifiedBVN
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: VerifiedPhoneNumber
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: LoanRequest
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: NoLoanApplication
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: LoanRejected
+      type: query
+      disabled: true
+    - name: OnboardingSteps
+      value: LoanApproved
+      type: query
+      disabled: true
+    - name: JoinedStartAt
+      value: ""
+      type: query
+      disabled: true
+    - name: JoinedEndAt
+      value: ""
+      type: query
+      disabled: true
+    - name: Search
+      value: ""
+      type: query
+      disabled: true
+    - name: Page
+      value: ""
+      type: query
+      disabled: true
+    - name: PageSize
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Order_By
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Sort_By
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

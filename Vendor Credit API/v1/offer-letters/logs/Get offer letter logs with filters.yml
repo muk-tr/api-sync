@@ -1,0 +1,88 @@
+info:
+  name: Get offer letter logs with filters
+  type: http
+  seq: 1
+  tags:
+    - LoanOfferLetterLogs
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/offer-letters/logs"
+  params:
+    - name: Status
+      value: Sent
+      type: query
+      disabled: true
+    - name: Status
+      value: Accepted
+      type: query
+      disabled: true
+    - name: Status
+      value: Rejected
+      type: query
+      disabled: true
+    - name: StartDate
+      value: ""
+      type: query
+      disabled: true
+    - name: EndDate
+      value: ""
+      type: query
+      disabled: true
+    - name: BusinessId
+      value: ""
+      type: query
+      disabled: true
+    - name: LoanRef
+      value: ""
+      type: query
+      disabled: true
+    - name: LoanType
+      value: Others
+      type: query
+      disabled: true
+    - name: LoanType
+      value: LocalPurchaseOrder
+      type: query
+      disabled: true
+    - name: LoanType
+      value: InvoiceDiscountingFacility
+      type: query
+      disabled: true
+    - name: LoanType
+      value: LeaseFinance
+      type: query
+      disabled: true
+    - name: LoanType
+      value: WorkingCapital
+      type: query
+      disabled: true
+    - name: Search
+      value: ""
+      type: query
+      disabled: true
+    - name: Page
+      value: ""
+      type: query
+      disabled: true
+    - name: PageSize
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Order_By
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Sort_By
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

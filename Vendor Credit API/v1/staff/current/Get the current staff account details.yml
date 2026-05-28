@@ -1,0 +1,19 @@
+info:
+  name: Get the current staff account details
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/staff/current"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

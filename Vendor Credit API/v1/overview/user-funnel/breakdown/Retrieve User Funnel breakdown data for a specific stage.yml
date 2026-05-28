@@ -1,0 +1,98 @@
+info:
+  name: Retrieve User Funnel breakdown data for a specific stage
+  type: http
+  seq: 1
+  tags:
+    - Overview
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/overview/user-funnel/breakdown"
+  params:
+    - name: StartAt
+      value: ""
+      type: query
+      disabled: true
+    - name: EndAt
+      value: ""
+      type: query
+      disabled: true
+    - name: CreatingPartner
+      value: ""
+      type: query
+      disabled: true
+    - name: stage
+      value: TotalSignups
+      type: query
+      disabled: true
+    - name: stage
+      value: VerifiedEmail
+      type: query
+      disabled: true
+    - name: stage
+      value: KycStarted
+      type: query
+      disabled: true
+    - name: stage
+      value: BvnProvided
+      type: query
+      disabled: true
+    - name: stage
+      value: KycCompleted
+      type: query
+      disabled: true
+    - name: stage
+      value: VerifiedBvn
+      type: query
+      disabled: true
+    - name: stage
+      value: VerifiedPhone
+      type: query
+      disabled: true
+    - name: stage
+      value: KycVerified
+      type: query
+      disabled: true
+    - name: stage
+      value: StartedBusinesses
+      type: query
+      disabled: true
+    - name: stage
+      value: KybCompleted
+      type: query
+      disabled: true
+    - name: stage
+      value: BusinessVerified
+      type: query
+      disabled: true
+    - name: stage
+      value: AppliedForLoan
+      type: query
+      disabled: true
+    - name: stage
+      value: LoanPending
+      type: query
+      disabled: true
+    - name: stage
+      value: LoanRejected
+      type: query
+      disabled: true
+    - name: stage
+      value: LoanApproved
+      type: query
+      disabled: true
+    - name: page
+      value: "1"
+      type: query
+    - name: pageSize
+      value: "20"
+      type: query
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

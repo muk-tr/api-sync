@@ -1,0 +1,25 @@
+info:
+  name: Add a note the investment rate guide
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/rate-guide/notes"
+  body:
+    type: json
+    data: |-
+      {
+        "content": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

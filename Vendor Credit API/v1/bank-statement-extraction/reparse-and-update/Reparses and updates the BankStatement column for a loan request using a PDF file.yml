@@ -1,0 +1,52 @@
+info:
+  name: Reparses and updates the BankStatement column for a loan request using a PDF file
+  type: http
+  seq: 1
+  tags:
+    - BankStatementExtraction
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/bank-statement-extraction/reparse-and-update"
+  body:
+    type: multipart-form
+    data:
+      - name: loanRequestId
+        type: text
+        value: ""
+      - name: statementType
+        type: text
+        value: ""
+      - name: channel
+        type: text
+        value: ""
+      - name: uri
+        type: text
+        value: ""
+      - name: ContentType
+        type: text
+        value: ""
+      - name: ContentDisposition
+        type: text
+        value: ""
+      - name: Headers
+        type: text
+        value: ""
+      - name: Length
+        type: text
+        value: ""
+      - name: Name
+        type: text
+        value: ""
+      - name: FileName
+        type: text
+        value: ""
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

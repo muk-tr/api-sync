@@ -1,0 +1,30 @@
+info:
+  name: Partial Update the customer profile
+  type: http
+  seq: 1
+  tags:
+    - Users
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/v1/users/:userId/profile"
+  params:
+    - name: userId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "bvn": "",
+        "nin": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

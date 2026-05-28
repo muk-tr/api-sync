@@ -1,0 +1,64 @@
+info:
+  name: Update a business profile
+  type: http
+  seq: 2
+  tags:
+    - Businesses
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/businesses/:businessId"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "managingCustomerId": 0,
+        "businessName": "",
+        "type": "LLC",
+        "rcNumber": "",
+        "taxIdentificationNumber": "",
+        "dateOfInc": "",
+        "industry": "Manufacturing",
+        "platforms": [
+          {
+            "platform": "Konga",
+            "merchantId": ""
+          }
+        ],
+        "businessEmailAddress": "",
+        "businessPhoneNumber": "",
+        "businessCountryCode": "",
+        "state": "",
+        "city": "",
+        "streetAddress": "",
+        "ownerOrDirectorId": 0,
+        "ownerOrDirectorFullName": "",
+        "ownerOrDirectorPhoneNumber": "",
+        "ownerOrDirectorCountryCode": "",
+        "ownerOrDirectorEmailAddress": "",
+        "ownerOrDirectorBankVerificationNumber": "",
+        "ownerNextOfKinFullName": "",
+        "ownerNextOfKinPhoneNumber": "",
+        "ownerNextOfKinCountryCode": "",
+        "secondDirectorsFullName": "",
+        "secondDirectorsPhoneNumber": "",
+        "secondDirectorsCountryCode": "",
+        "secondDirectorsEmailAddress": "",
+        "secondDirectorsBankVerificationNumber": "",
+        "secondDirectorsNextOfKinFullName": "",
+        "secondDirectorsNextOfKinPhoneNumber": "",
+        "secondDirectorsNextOfKinCountryCode": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

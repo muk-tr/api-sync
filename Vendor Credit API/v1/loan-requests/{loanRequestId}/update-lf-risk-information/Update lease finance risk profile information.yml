@@ -1,0 +1,55 @@
+info:
+  name: Update lease finance risk profile information
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/loan-requests/:loanRequestId/update-lf-risk-information"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "age": "",
+        "brandImage": "LinkedIn",
+        "companyProfile": "LLC",
+        "repaymentPerformance": "",
+        "numberOfSuccessfulTransactions": 0,
+        "recessionImpact": "Low",
+        "industry": "Manufacturing",
+        "businessRelationship": "None",
+        "yearsInIncorporation": "",
+        "repaymentSecurity": 0,
+        "insurance": false,
+        "comments": "",
+        "isOnDunAndBradstreet": false,
+        "averageDaysInArrears": 0,
+        "creditMix": 0,
+        "numberOfPaidOffTransactions": 0,
+        "durationWithVC": "",
+        "durationInBusiness": "",
+        "directorCreditHistory": "",
+        "companyCreditHistory": "",
+        "averageAnnualRevenueVsLoanValue": 0,
+        "forceSaleValue": 0,
+        "equityContribution": 0,
+        "amortizationPeriod": 0,
+        "assetSecurity": "Property",
+        "paymentTerms": "Low",
+        "averageGrossProfitMargin": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,80 @@
+info:
+  name: Get User Requested Check Items
+  type: http
+  seq: 1
+  tags:
+    - MakerChecker
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/maker-checkers/requested"
+  params:
+    - name: actionType
+      value: RepaymentReversal
+      type: query
+      disabled: true
+    - name: actionType
+      value: DisbursementReversal
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleCreation
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleUpdate
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleDeletion
+      type: query
+      disabled: true
+    - name: actionType
+      value: CreditTransaction
+      type: query
+      disabled: true
+    - name: actionType
+      value: DebitTransaction
+      type: query
+      disabled: true
+    - name: checkerStatus
+      value: NotApplicable
+      type: query
+      disabled: true
+    - name: checkerStatus
+      value: New
+      type: query
+      disabled: true
+    - name: checkerStatus
+      value: Pending
+      type: query
+      disabled: true
+    - name: checkerStatus
+      value: Approved
+      type: query
+      disabled: true
+    - name: checkerStatus
+      value: Rejected
+      type: query
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      disabled: true
+    - name: uniqueId
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

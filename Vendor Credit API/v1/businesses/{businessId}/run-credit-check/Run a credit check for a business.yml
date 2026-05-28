@@ -1,0 +1,21 @@
+info:
+  name: Run a credit check for a business
+  type: http
+  seq: 1
+  tags:
+    - Businesses
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/businesses/:businessId/run-credit-check"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

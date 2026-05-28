@@ -1,0 +1,26 @@
+info:
+  name: Remove a workflow mapping from a loan product
+  type: http
+  seq: 2
+  tags:
+    - LoanProducts
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v1/loan-products/:id/workflow-mappings/:workflowId"
+  params:
+    - name: id
+      value: ""
+      type: path
+    - name: workflowId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

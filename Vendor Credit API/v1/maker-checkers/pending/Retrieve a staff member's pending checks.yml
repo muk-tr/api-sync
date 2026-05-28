@@ -1,0 +1,56 @@
+info:
+  name: Retrieve a staff member's pending checks
+  type: http
+  seq: 1
+  tags:
+    - MakerChecker
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/maker-checkers/pending"
+  params:
+    - name: actionType
+      value: RepaymentReversal
+      type: query
+      disabled: true
+    - name: actionType
+      value: DisbursementReversal
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleCreation
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleUpdate
+      type: query
+      disabled: true
+    - name: actionType
+      value: RoleDeletion
+      type: query
+      disabled: true
+    - name: actionType
+      value: CreditTransaction
+      type: query
+      disabled: true
+    - name: actionType
+      value: DebitTransaction
+      type: query
+      disabled: true
+    - name: requestedOn
+      value: ""
+      type: query
+      disabled: true
+    - name: uniqueId
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,31 @@
+info:
+  name: Add a new role
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/staff/roles"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "description": "",
+        "permissions": [
+          "view_dashboard_reports"
+        ],
+        "staffGroupId": 0,
+        "userIds": []
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

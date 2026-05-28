@@ -1,0 +1,23 @@
+info:
+  name: Get a business profile's logs
+  type: http
+  seq: 1
+  tags:
+    - Businesses
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/businesses/:businessId/logs"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

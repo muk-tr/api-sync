@@ -1,0 +1,19 @@
+info:
+  name: Fetch states in Nigeria
+  type: http
+  seq: 1
+  tags:
+    - Users
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/users/states"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

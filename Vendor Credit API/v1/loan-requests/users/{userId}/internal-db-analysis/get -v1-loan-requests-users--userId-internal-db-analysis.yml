@@ -1,0 +1,23 @@
+info:
+  name: get /v1/loan-requests/users/:userId/internal-db-analysis
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-requests/users/:userId/internal-db-analysis"
+  params:
+    - name: userId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,26 @@
+info:
+  name: Retrieve investment payout
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/investments/:investmentId/payouts/:payoutId"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+    - name: payoutId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

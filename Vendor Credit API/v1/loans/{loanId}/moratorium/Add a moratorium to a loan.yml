@@ -1,0 +1,31 @@
+info:
+  name: Add a moratorium to a loan
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loans/:loanId/moratorium"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "moratoriumType": "PrincipalOnly",
+        "numberOfInstallments": 0,
+        "comment": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

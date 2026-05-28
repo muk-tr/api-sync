@@ -1,0 +1,196 @@
+info:
+  name: Retrieve loan requests
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-requests"
+  params:
+    - name: LoanType
+      value: Others
+      type: query
+      disabled: true
+    - name: LoanType
+      value: LocalPurchaseOrder
+      type: query
+      disabled: true
+    - name: LoanType
+      value: InvoiceDiscountingFacility
+      type: query
+      disabled: true
+    - name: LoanType
+      value: LeaseFinance
+      type: query
+      disabled: true
+    - name: LoanType
+      value: WorkingCapital
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: CreatedUnsubmitted
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: InitialOfferAccepted
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: SubmittedForReview
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: AwaitingCGOReview
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: AcceptedForProcessing
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: AwaitingCROReview
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: AwaitingCFOReview
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: PreApproved
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: OfferAccepted
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: OfferRejected
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Rejected
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Approved
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Converted
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Expired
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Archived
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Cancelled
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: PendingRestructuring
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: Restructured
+      type: query
+      disabled: true
+    - name: LoanRequestStatus
+      value: TransactionLost
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: AwaitingDisbursement
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Active
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Repaid
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: PastDue
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Lost
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Restructured
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Cancelled
+      type: query
+      disabled: true
+    - name: LoanStatus
+      value: Missed
+      type: query
+      disabled: true
+    - name: CustomerId
+      value: ""
+      type: query
+      disabled: true
+    - name: FromAmount
+      value: ""
+      type: query
+      disabled: true
+    - name: ToAmount
+      value: ""
+      type: query
+      disabled: true
+    - name: MaturityStartAt
+      value: ""
+      type: query
+      disabled: true
+    - name: MaturityEndAt
+      value: ""
+      type: query
+      disabled: true
+    - name: CreatedStartAt
+      value: ""
+      type: query
+      disabled: true
+    - name: CreatedEndAt
+      value: ""
+      type: query
+      disabled: true
+    - name: Search
+      value: ""
+      type: query
+      disabled: true
+    - name: Page
+      value: ""
+      type: query
+      disabled: true
+    - name: PageSize
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Order_By
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Sort_By
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

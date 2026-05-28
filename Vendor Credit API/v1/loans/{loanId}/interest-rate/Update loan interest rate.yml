@@ -1,0 +1,29 @@
+info:
+  name: Update loan interest rate
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/v1/loans/:loanId/interest-rate"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "interestRate": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

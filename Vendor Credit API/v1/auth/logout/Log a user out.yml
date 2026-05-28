@@ -1,0 +1,25 @@
+info:
+  name: Log a user out
+  type: http
+  seq: 1
+  tags:
+    - Auth
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/auth/logout"
+  body:
+    type: json
+    data: |-
+      {
+        "token": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

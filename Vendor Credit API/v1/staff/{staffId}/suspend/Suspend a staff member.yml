@@ -1,0 +1,23 @@
+info:
+  name: Suspend a staff member
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/staff/:staffId/suspend"
+  params:
+    - name: staffId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

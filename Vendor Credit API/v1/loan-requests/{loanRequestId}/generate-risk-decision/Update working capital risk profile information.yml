@@ -1,0 +1,23 @@
+info:
+  name: Update working capital risk profile information
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-requests/:loanRequestId/generate-risk-decision"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

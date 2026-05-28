@@ -1,0 +1,23 @@
+info:
+  name: Decline a pending transaction
+  type: http
+  seq: 1
+  tags:
+    - Transactions
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/transactions/:transactionId/decline"
+  params:
+    - name: transactionId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

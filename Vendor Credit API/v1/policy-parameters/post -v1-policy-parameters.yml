@@ -1,0 +1,28 @@
+info:
+  name: post /v1/policy-parameters
+  type: http
+  seq: 1
+  tags:
+    - PolicyParameters
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/policy-parameters"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "isSystemDerived": false,
+        "isActive": false,
+        "createdBy": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

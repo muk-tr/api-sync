@@ -1,0 +1,31 @@
+info:
+  name: Add a transfer recipient to the callers account
+  type: http
+  seq: 2
+  tags:
+    - TransferRecipients
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/transfer-recipients"
+  body:
+    type: json
+    data: |-
+      {
+        "bankCode": "",
+        "bankName": "",
+        "accountNumber": "",
+        "accountName": "",
+        "userId": 0,
+        "otpCode": "",
+        "walletId": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,40 @@
+info:
+  name: Retrieve all staff
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/staff"
+  params:
+    - name: Search
+      value: ""
+      type: query
+      disabled: true
+    - name: Page
+      value: ""
+      type: query
+      disabled: true
+    - name: PageSize
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Order_By
+      value: ""
+      type: query
+      disabled: true
+    - name: Sort.Sort_By
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

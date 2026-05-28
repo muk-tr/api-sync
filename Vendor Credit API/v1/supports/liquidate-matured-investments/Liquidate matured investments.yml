@@ -1,0 +1,19 @@
+info:
+  name: Liquidate matured investments
+  type: http
+  seq: 1
+  tags:
+    - Supports
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/supports/liquidate-matured-investments"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

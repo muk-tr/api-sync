@@ -1,0 +1,26 @@
+info:
+  name: Send a loan amendment request to the CRO for review
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/:loanRequestId/pre-approve-amendment/:amendmentRequestId"
+  params:
+    - name: loanRequestId
+      value: ""
+      type: path
+    - name: amendmentRequestId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

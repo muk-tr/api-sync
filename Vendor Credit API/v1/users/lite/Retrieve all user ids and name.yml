@@ -1,0 +1,19 @@
+info:
+  name: Retrieve all user ids and name
+  type: http
+  seq: 1
+  tags:
+    - Users
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/users/lite"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

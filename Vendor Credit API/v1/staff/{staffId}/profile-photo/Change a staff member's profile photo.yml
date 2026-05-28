@@ -1,0 +1,29 @@
+info:
+  name: Change a staff member's profile photo
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/staff/:staffId/profile-photo"
+  params:
+    - name: staffId
+      value: ""
+      type: path
+  body:
+    type: multipart-form
+    data:
+      - name: File
+        type: file
+        value: []
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

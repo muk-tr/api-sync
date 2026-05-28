@@ -1,0 +1,28 @@
+info:
+  name: Retrieve all caller's transfer recipients
+  type: http
+  seq: 1
+  tags:
+    - TransferRecipients
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/transfer-recipients"
+  params:
+    - name: userId
+      value: ""
+      type: query
+      disabled: true
+    - name: walletId
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

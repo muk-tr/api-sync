@@ -1,0 +1,31 @@
+info:
+  name: Make a loan extension request
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loans/:loanId/add-loan-extension"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "tenorInDays": 0,
+        "comment": "",
+        "extensionFeeRate": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

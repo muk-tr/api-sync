@@ -1,0 +1,26 @@
+info:
+  name: Remove a moratorium from a loan
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v1/loans/:loanId/moratoriums/:moratoriumId"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+    - name: moratoriumId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

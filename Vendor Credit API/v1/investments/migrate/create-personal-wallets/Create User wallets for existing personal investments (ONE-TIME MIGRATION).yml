@@ -1,0 +1,27 @@
+info:
+  name: Create User wallets for existing personal investments (ONE-TIME MIGRATION)
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/migrate/create-personal-wallets"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: "This endpoint should only be run once to create User wallets for existing personal investments.\r
+
+  After successful execution, remove this endpoint.\r
+
+  \            \r
+
+  Requires: Staff with create_staff_account permission"

@@ -1,0 +1,31 @@
+info:
+  name: Reverse a repayment
+  type: http
+  seq: 1
+  tags:
+    - Loans
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loans/:loanId/reverse-repayment"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "amount": 0,
+        "transactionReference": "",
+        "repaidAt": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

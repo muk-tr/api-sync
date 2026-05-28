@@ -1,0 +1,23 @@
+info:
+  name: Retrieve a loan request with loanID
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-requests/:loanId/loans"
+  params:
+    - name: loanId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

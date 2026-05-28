@@ -1,0 +1,34 @@
+info:
+  name: Create an investment (NGN or USD)
+  type: http
+  seq: 2
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments"
+  body:
+    type: json
+    data: |-
+      {
+        "ownerId": 0,
+        "businessId": 0,
+        "principalAmount": 0,
+        "payoutFrequency": "AtMaturity",
+        "tenorInDays": 0,
+        "interestRate": 0,
+        "sourceInvestmentId": 0,
+        "applyWithholdingTax": false,
+        "currency": "NGN",
+        "maturityAction": "LiquidateAll"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

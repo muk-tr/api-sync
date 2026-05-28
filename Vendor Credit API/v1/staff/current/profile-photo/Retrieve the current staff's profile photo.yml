@@ -1,0 +1,19 @@
+info:
+  name: Retrieve the current staff's profile photo
+  type: http
+  seq: 1
+  tags:
+    - Staff
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/staff/current/profile-photo"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

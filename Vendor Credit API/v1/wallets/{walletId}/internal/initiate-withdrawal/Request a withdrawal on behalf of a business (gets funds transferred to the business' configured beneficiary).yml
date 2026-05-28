@@ -1,0 +1,33 @@
+info:
+  name: Request a withdrawal on behalf of a business (gets funds transferred to the business' configured beneficiary)
+  type: http
+  seq: 1
+  tags:
+    - Wallets
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/wallets/:walletId/internal/initiate-withdrawal"
+  params:
+    - name: walletId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "amount": 0,
+        "recipientAccountNumber": "",
+        "recipientAccountName": "",
+        "recipientBankName": "",
+        "narration": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

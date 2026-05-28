@@ -1,0 +1,19 @@
+info:
+  name: Export partners as an PDF file
+  type: http
+  seq: 1
+  tags:
+    - IntegrationPartners
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/integration-partners/export/pdf"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

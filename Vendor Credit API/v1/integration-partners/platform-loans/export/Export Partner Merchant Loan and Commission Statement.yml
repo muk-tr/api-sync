@@ -1,0 +1,27 @@
+info:
+  name: Export Partner Merchant Loan and Commission Statement
+  type: http
+  seq: 1
+  tags:
+    - IntegrationPartners
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/integration-partners/platform-loans/export"
+  body:
+    type: json
+    data: |-
+      {
+        "startAt": "",
+        "endAt": "",
+        "format": "Pdf"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

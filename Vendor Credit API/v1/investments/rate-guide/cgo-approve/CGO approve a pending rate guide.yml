@@ -1,0 +1,19 @@
+info:
+  name: CGO approve a pending rate guide
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/rate-guide/cgo-approve"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

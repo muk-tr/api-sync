@@ -1,0 +1,32 @@
+info:
+  name: Generate a new virtual account
+  type: http
+  seq: 1
+  tags:
+    - Wallets
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/wallets/:walletId/virtual-accounts"
+  params:
+    - name: walletId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "businessId": 0,
+        "userId": 0,
+        "currency": "NGN",
+        "provider": "Wema"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

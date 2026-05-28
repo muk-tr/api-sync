@@ -1,0 +1,32 @@
+info:
+  name: Retrieve All unverified Businesses With Active Loans
+  type: http
+  seq: 1
+  tags:
+    - Overview
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/overview/unverified-businesses-active-loans"
+  params:
+    - name: StartAt
+      value: ""
+      type: query
+      disabled: true
+    - name: EndAt
+      value: ""
+      type: query
+      disabled: true
+    - name: CreatingPartner
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

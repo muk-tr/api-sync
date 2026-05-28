@@ -1,0 +1,29 @@
+info:
+  name: Set workflow active/inactive status
+  type: http
+  seq: 1
+  tags:
+    - ApprovalWorkflows
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/v1/approval-workflows/:id/active"
+  params:
+    - name: id
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "isActive": false
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

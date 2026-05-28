@@ -1,0 +1,23 @@
+info:
+  name: Approve a business flagged for similarity
+  type: http
+  seq: 1
+  tags:
+    - Compliance
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/compliance/approve-similarity/:businessId"
+  params:
+    - name: businessId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

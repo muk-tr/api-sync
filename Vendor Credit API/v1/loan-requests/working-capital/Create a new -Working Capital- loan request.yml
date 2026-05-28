@@ -1,0 +1,34 @@
+info:
+  name: Create a new "Working Capital" loan request
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/working-capital"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 0,
+        "businessId": 0,
+        "loanPurpose": "",
+        "thirdPastMonthRevenue": 0,
+        "secondPastMonthRevenue": 0,
+        "pastMonthRevenue": 0,
+        "loanAmount": 0,
+        "tenorInDays": 0,
+        "counterPartyName": "",
+        "sourceLoanRequestId": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

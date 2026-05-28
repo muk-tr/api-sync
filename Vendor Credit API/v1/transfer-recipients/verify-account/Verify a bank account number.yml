@@ -1,0 +1,26 @@
+info:
+  name: Verify a bank account number
+  type: http
+  seq: 1
+  tags:
+    - TransferRecipients
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/transfer-recipients/verify-account"
+  body:
+    type: json
+    data: |-
+      {
+        "bankCode": "",
+        "accountNumber": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

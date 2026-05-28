@@ -1,0 +1,24 @@
+info:
+  name: Retrieves a loan appraisal by its ID.
+  type: http
+  seq: 1
+  tags:
+    - LoanAppraisals
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/loan-appraisals/:id"
+  params:
+    - name: id
+      value: ""
+      type: path
+      description: The ID of the loan appraisal.
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

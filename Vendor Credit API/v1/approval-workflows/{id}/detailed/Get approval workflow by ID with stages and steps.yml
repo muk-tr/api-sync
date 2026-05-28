@@ -1,0 +1,23 @@
+info:
+  name: Get approval workflow by ID with stages and steps
+  type: http
+  seq: 1
+  tags:
+    - ApprovalWorkflows
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/approval-workflows/:id/detailed"
+  params:
+    - name: id
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

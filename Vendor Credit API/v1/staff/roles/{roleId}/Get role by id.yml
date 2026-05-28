@@ -1,0 +1,23 @@
+info:
+  name: Get role by id
+  type: http
+  seq: 2
+  tags:
+    - Staff
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/staff/roles/:roleId"
+  params:
+    - name: roleId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,19 @@
+info:
+  name: Get investment metrics
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/investments/metrics"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

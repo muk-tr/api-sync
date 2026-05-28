@@ -1,0 +1,29 @@
+info:
+  name: Add a note an investment
+  type: http
+  seq: 1
+  tags:
+    - Investments
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/investments/:investmentId/notes"
+  params:
+    - name: investmentId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "content": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,38 @@
+info:
+  name: Update an existing loan request in the Loan Automation system
+  type: http
+  seq: 2
+  tags:
+    - LoanRequests
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v1/loan-automation/loan-requests/:id"
+  params:
+    - name: id
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "externalId": "",
+        "amount": 0,
+        "loanProductId": 0,
+        "creditPolicyUserInputs": [
+          {
+            "slug": "",
+            "value": ""
+          }
+        ],
+        "updatedAt": ""
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,36 @@
+info:
+  name: Create a new "IDF" loan request
+  type: http
+  seq: 1
+  tags:
+    - LoanRequests
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-requests/idf"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 0,
+        "businessId": 0,
+        "counterPartyName": "",
+        "counterPartyEmail": "",
+        "invoiceSubmissionDate": "",
+        "invoiceValue": 0,
+        "invoiceNumber": "",
+        "poNumber": "",
+        "paymentAt": "",
+        "loanAmount": 0,
+        "tenorInDays": 0,
+        "sourceLoanRequestId": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

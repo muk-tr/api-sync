@@ -1,0 +1,23 @@
+info:
+  name: Deactivate an Integration Partner account
+  type: http
+  seq: 1
+  tags:
+    - IntegrationPartners
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/integration-partners/:partnerId/deactivate"
+  params:
+    - name: partnerId
+      value: ""
+      type: path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

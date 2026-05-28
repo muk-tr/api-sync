@@ -1,0 +1,26 @@
+info:
+  name: Merge corporate profiles
+  type: http
+  seq: 1
+  tags:
+    - CorporateProfiles
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/corporate-profiles/merge"
+  body:
+    type: json
+    data: |-
+      {
+        "verifiedProfileId": 0,
+        "unverifiedProfileIds": []
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

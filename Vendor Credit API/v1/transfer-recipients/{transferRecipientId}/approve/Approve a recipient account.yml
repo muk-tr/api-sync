@@ -1,0 +1,30 @@
+info:
+  name: Approve a recipient account
+  type: http
+  seq: 1
+  tags:
+    - TransferRecipients
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/transfer-recipients/:transferRecipientId/approve"
+  params:
+    - name: transferRecipientId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "otpCode": "",
+        "walletId": 0
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

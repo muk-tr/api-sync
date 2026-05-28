@@ -1,0 +1,32 @@
+info:
+  name: Create a new loan product
+  type: http
+  seq: 1
+  tags:
+    - LoanProducts
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/loan-products"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "minimumLoanTenor": 0,
+        "maximumLoanTenor": 0,
+        "hasMoratorium": false,
+        "moratoriumPeriodInDays": 0,
+        "minAmount": 0,
+        "maxAmount": 0,
+        "loanProductCategory": "Individual"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
