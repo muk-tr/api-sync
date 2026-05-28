@@ -19,7 +19,7 @@ public static class BrunoWriter
 
         foreach (var (folder, folderRequests) in grouped)
         {
-            var folderPath = folder.Length == 0 ? root : Path.Combine(root, folder);
+            var folderPath = folder.Length == 0 ? root : Path.Combine(root, Sanitize(folder));
             Directory.CreateDirectory(folderPath);
 
             foreach (var request in folderRequests)
@@ -69,11 +69,21 @@ public static class BrunoWriter
         return grouped;
     }
 
+    // Skip version segments like "v1", "v2", "v{version:apiVersion}" and use the next one
     private static string? FirstPathSegment(string path)
     {
-        var segment = path.Trim('/').Split('/')[0];
-        return segment.Length > 0 ? segment : null;
+        foreach (var segment in path.Trim('/').Split('/'))
+        {
+            if (segment.Length == 0) continue;
+            if (IsVersionSegment(segment)) continue;
+            return segment;
+        }
+        return null;
     }
+
+    private static bool IsVersionSegment(string segment) =>
+        segment.StartsWith('v') &&
+        (char.IsDigit(segment[1..].TrimStart('{')[0]) || segment.Contains("version", StringComparison.OrdinalIgnoreCase));
 
     private static string RenderBru(NormalizedRequest request, int seq)
     {
