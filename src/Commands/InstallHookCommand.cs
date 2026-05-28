@@ -90,7 +90,10 @@ public class InstallHookCommand : Command
 
             # >>> api-sync >>>
             # Syncs Bruno collection on branch switch (not file checkouts)
-            [ "$3" = "1" ] && api-sync sync
+            if [ "$3" = "1" ]; then
+              export PATH="$PATH:$HOME/.dotnet/tools"
+              api-sync sync
+            fi
             # <<< api-sync <<<
             """;
 
