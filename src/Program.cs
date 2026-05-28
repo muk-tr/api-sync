@@ -12,6 +12,9 @@ app.Configure(config =>
 
     config.AddCommand<SyncCommand>("sync")
         .WithDescription("Sync the current branch to all configured Bruno collections");
+
+    config.AddCommand<InstallHookCommand>("install-hook")
+        .WithDescription("Install git hooks and MSBuild targets to auto-sync on branch switch or build");
 });
 
 return app.Run(args);
