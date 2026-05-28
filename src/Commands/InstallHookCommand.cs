@@ -27,14 +27,19 @@ public class InstallHookCommand : Command
         }
 
         var hookPath = Path.Combine(gitDir, "hooks", "post-checkout");
-        var installed = InstallPostCheckoutHook(gitDir);
+        var hookInstalled = InstallPostCheckoutHook(gitDir);
 
-        AnsiConsole.MarkupLine(installed
-            ? $"[green]✓[/] post-checkout hook installed → [bold]{hookPath}[/]"
-            : $"[grey]  post-checkout hook already present — nothing changed.[/]");
+        AnsiConsole.MarkupLine(hookInstalled
+            ? $"[green]✓[/] post-checkout hook → [bold]{hookPath}[/]"
+            : $"[grey]  post-checkout hook already present[/]");
 
-        if (installed)
-            AnsiConsole.MarkupLine("[grey]  api-sync sync will run automatically on every branch switch.[/]");
+        var excludeInstalled = InstallGitExclude(gitDir);
+
+        AnsiConsole.MarkupLine(excludeInstalled
+            ? $"[green]✓[/] .api-sync.json added to [bold]{Path.Combine(gitDir, "info", "exclude")}[/]"
+            : $"[grey]  .git/info/exclude already up to date[/]");
+
+        AnsiConsole.MarkupLine("\n[grey]api-sync sync will run automatically on every branch switch.[/]");
 
         return 0;
     }
@@ -49,6 +54,29 @@ public class InstallHookCommand : Command
             dir = Path.GetDirectoryName(dir);
         }
         return null;
+    }
+
+    private static bool InstallGitExclude(string gitDir)
+    {
+        var infoDir = Path.Combine(gitDir, "info");
+        Directory.CreateDirectory(infoDir);
+        var excludePath = Path.Combine(infoDir, "exclude");
+
+        const string entry = ".api-sync.json";
+        const string marker = "# api-sync";
+
+        if (File.Exists(excludePath))
+        {
+            var existing = File.ReadAllText(excludePath);
+            if (existing.Contains(marker)) return false;
+            File.AppendAllText(excludePath, $"\n{marker}\n{entry}\n");
+        }
+        else
+        {
+            File.WriteAllText(excludePath, $"{marker}\n{entry}\n");
+        }
+
+        return true;
     }
 
     private static bool InstallPostCheckoutHook(string gitDir)
