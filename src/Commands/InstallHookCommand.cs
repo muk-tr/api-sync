@@ -8,7 +8,6 @@ public class InstallHookCommand : Command
 {
     protected override int Execute(CommandContext context, CancellationToken cancellationToken)
     {
-        // Config must exist but we only need it to confirm we're in the right directory
         try
         {
             ConfigLoader.Load(Directory.GetCurrentDirectory());
@@ -62,8 +61,8 @@ public class InstallHookCommand : Command
         Directory.CreateDirectory(infoDir);
         var excludePath = Path.Combine(infoDir, "exclude");
 
-        const string entry = ".api-sync.json";
         const string marker = "# api-sync";
+        const string entry = ".api-sync.json";
 
         if (File.Exists(excludePath))
         {
@@ -86,13 +85,23 @@ public class InstallHookCommand : Command
         var hookPath = Path.Combine(hooksDir, "post-checkout");
 
         const string marker = "# >>> api-sync >>>";
-        const string block = """
+
+        // Resolve how to invoke api-sync from a shell.
+        // Prefer the global tool name; fall back to the DLL path for dev scenarios.
+        var dllPath = typeof(InstallHookCommand).Assembly.Location;
+        var bashDllPath = ToGitBashPath(dllPath);
+
+        var block = $"""
 
             # >>> api-sync >>>
             # Syncs Bruno collection on branch switch (not file checkouts)
             if [ "$3" = "1" ]; then
               export PATH="$PATH:$HOME/.dotnet/tools"
-              api-sync sync
+              if command -v api-sync >/dev/null 2>&1; then
+                api-sync sync
+              else
+                dotnet "{bashDllPath}" sync
+              fi
             fi
             # <<< api-sync <<<
             """;
@@ -107,7 +116,6 @@ public class InstallHookCommand : Command
             File.WriteAllText(hookPath, "#!/bin/sh" + block);
         }
 
-        // Make executable on non-Windows
         if (!OperatingSystem.IsWindows())
         {
             var fi = new FileInfo(hookPath);
@@ -115,5 +123,15 @@ public class InstallHookCommand : Command
         }
 
         return true;
+    }
+
+    // Converts a Windows path to the forward-slash format Git for Windows bash expects.
+    // e.g. C:\Users\foo\bar.dll -> /c/Users/foo/bar.dll
+    private static string ToGitBashPath(string path)
+    {
+        var p = path.Replace('\\', '/');
+        if (p.Length >= 2 && p[1] == ':')
+            p = "/" + char.ToLower(p[0]) + p[2..];
+        return p;
     }
 }
