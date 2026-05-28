@@ -96,9 +96,9 @@ public class InitCommand : Command<InitSettings>
                 new SelectionPrompt<string>()
                     .Title("  Spec source:")
                     .AddChoices(
+                        ".NET assembly (default)",
                         "Local file path",
-                        "URL (running endpoint)",
-                        ".NET assembly (fallback)"
+                        "URL (running endpoint)"
                     )
             );
 
@@ -116,13 +116,14 @@ public class InitCommand : Command<InitSettings>
                     break;
 
                 case "URL (running endpoint)":
+                    var urlDefault = $"https://localhost:5001/swagger/v1/swagger.json";
                     openapiUrl = AnsiConsole.Prompt(
                         new TextPrompt<string>("  OpenAPI URL:")
-                            .DefaultValue("https://localhost:5001/swagger/v1/swagger.json")
+                            .DefaultValue(urlDefault)
                     );
                     break;
 
-                case ".NET assembly (fallback)":
+                case ".NET assembly (default)":
                     var assemblyDefault = entry.Project?.DefaultAssemblyPath
                         ?? "./bin/Debug/net10.0/MyApi.dll";
                     assemblyPath = AnsiConsole.Prompt(
