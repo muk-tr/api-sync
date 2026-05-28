@@ -2,7 +2,8 @@ namespace api_sync.Config;
 
 public record ApiSyncConfig(
     List<string> SyncBranches,
-    List<BrunoProviderConfig> Providers
+    List<BrunoProviderConfig> Providers,
+    string? ToolCommand = null  // how to invoke api-sync — defaults to "api-sync" (global install)
 );
 
 public record BrunoProviderConfig(

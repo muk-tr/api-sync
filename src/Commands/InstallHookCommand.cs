@@ -8,9 +8,10 @@ public class InstallHookCommand : Command
 {
     protected override int Execute(CommandContext context, CancellationToken cancellationToken)
     {
+        ApiSyncConfig config;
         try
         {
-            ConfigLoader.Load(Directory.GetCurrentDirectory());
+            config = ConfigLoader.Load(Directory.GetCurrentDirectory());
         }
         catch (ConfigException ex)
         {
@@ -25,12 +26,15 @@ public class InstallHookCommand : Command
             return 1;
         }
 
+        // toolCommand from config, or "api-sync" if installed globally
+        var toolCommand = config.ToolCommand ?? "api-sync";
+
         var hookPath = Path.Combine(gitDir, "hooks", "post-checkout");
-        var hookInstalled = InstallPostCheckoutHook(gitDir);
+        var hookInstalled = InstallPostCheckoutHook(gitDir, toolCommand);
 
         AnsiConsole.MarkupLine(hookInstalled
             ? $"[green]✓[/] post-checkout hook → [bold]{hookPath}[/]"
-            : $"[grey]  post-checkout hook already present[/]");
+            : $"[grey]  post-checkout hook updated[/]");
 
         var excludeInstalled = InstallGitExclude(gitDir);
 
@@ -38,7 +42,8 @@ public class InstallHookCommand : Command
             ? $"[green]✓[/] .api-sync.json added to [bold]{Path.Combine(gitDir, "info", "exclude")}[/]"
             : $"[grey]  .git/info/exclude already up to date[/]");
 
-        AnsiConsole.MarkupLine("\n[grey]api-sync sync will run automatically on every branch switch.[/]");
+        AnsiConsole.MarkupLine($"\n[grey]Using command:[/] [bold]{toolCommand}[/]");
+        AnsiConsole.MarkupLine("[grey]api-sync sync will run automatically on every branch switch.[/]");
 
         return 0;
     }
@@ -78,18 +83,14 @@ public class InstallHookCommand : Command
         return true;
     }
 
-    private static bool InstallPostCheckoutHook(string gitDir)
+    private static bool InstallPostCheckoutHook(string gitDir, string toolCommand)
     {
         var hooksDir = Path.Combine(gitDir, "hooks");
         Directory.CreateDirectory(hooksDir);
         var hookPath = Path.Combine(hooksDir, "post-checkout");
 
         const string marker = "# >>> api-sync >>>";
-
-        // Resolve how to invoke api-sync from a shell.
-        // Prefer the global tool name; fall back to the DLL path for dev scenarios.
-        var dllPath = typeof(InstallHookCommand).Assembly.Location;
-        var bashDllPath = ToGitBashPath(dllPath);
+        const string endMarker = "# <<< api-sync <<<";
 
         var block = $"""
 
@@ -97,18 +98,30 @@ public class InstallHookCommand : Command
             # Syncs Bruno collection on branch switch (not file checkouts)
             if [ "$3" = "1" ]; then
               export PATH="$PATH:$HOME/.dotnet/tools"
-              if command -v api-sync >/dev/null 2>&1; then
-                api-sync sync
-              else
-                dotnet "{bashDllPath}" sync
-              fi
+              {toolCommand} sync
             fi
             # <<< api-sync <<<
             """;
 
         if (File.Exists(hookPath))
         {
-            if (File.ReadAllText(hookPath).Contains(marker)) return false;
+            var existing = File.ReadAllText(hookPath);
+
+            if (existing.Contains(marker))
+            {
+                // Replace the existing api-sync block
+                var start = existing.IndexOf(marker, StringComparison.Ordinal);
+                var end = existing.IndexOf(endMarker, start, StringComparison.Ordinal);
+                if (end >= 0)
+                {
+                    var after = existing[(end + endMarker.Length)..];
+                    var updated = existing[..start].TrimEnd() + block + after;
+                    if (updated == existing) return false; // nothing changed
+                    File.WriteAllText(hookPath, updated);
+                    return true;
+                }
+            }
+
             File.AppendAllText(hookPath, block);
         }
         else
@@ -123,15 +136,5 @@ public class InstallHookCommand : Command
         }
 
         return true;
-    }
-
-    // Converts a Windows path to the forward-slash format Git for Windows bash expects.
-    // e.g. C:\Users\foo\bar.dll -> /c/Users/foo/bar.dll
-    private static string ToGitBashPath(string path)
-    {
-        var p = path.Replace('\\', '/');
-        if (p.Length >= 2 && p[1] == ':')
-            p = "/" + char.ToLower(p[0]) + p[2..];
-        return p;
     }
 }
