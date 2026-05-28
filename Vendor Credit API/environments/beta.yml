@@ -1,6 +1,0 @@
-name: beta
-variables:
-  - name: baseUrl
-    value: https://beta.portal.api.vendorcredit.ng
-  - secret: true
-    name: secret

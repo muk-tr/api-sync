@@ -5,3 +5,7 @@ riderModule.iml
 /_ReSharper.Caches/
 .idea/
 .api-sync.json
+
+# Bruno collections are managed by api-sync, not tracked here
+*.bru
+Vendor Credit API/
