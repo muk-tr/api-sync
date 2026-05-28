@@ -60,7 +60,7 @@ public class SyncCommand : AsyncCommand
                     AnsiConsole.MarkupLine($"    [cyan]{r.Method,-7}[/] {r.Path} {tags}");
                 }
 
-                BrunoWriter.Write(provider, requests);
+                BrunoWriter.Write(provider, requests, currentBranch);
 
                 if (currentBranch is not null)
                 {

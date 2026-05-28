@@ -7,7 +7,7 @@ namespace api_sync.Bruno;
 
 public static class BrunoWriter
 {
-    public static void Write(BrunoProviderConfig provider, List<NormalizedRequest> requests)
+    public static void Write(BrunoProviderConfig provider, List<NormalizedRequest> requests, string? branch = null)
     {
         var root = provider.RepoPath;
         Directory.CreateDirectory(root);
@@ -47,6 +47,17 @@ public static class BrunoWriter
                 WriteOrUpdate(filePath, RenderRequest(request, seq++));
                 writtenFiles.Add(filePath);
             }
+        }
+
+        if (branch is not null)
+        {
+            var statePath = Path.Combine(root, "api-sync.yml");
+            File.WriteAllText(statePath, $$"""
+                collection: {{provider.CollectionName}}
+                branch: {{branch}}
+                lastSync: {{DateTime.UtcNow:yyyy-MM-dd HH:mm}} UTC
+                """);
+            writtenFiles.Add(statePath);
         }
 
         RemoveStale(root, writtenFiles);
